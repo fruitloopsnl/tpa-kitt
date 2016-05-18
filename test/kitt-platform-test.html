@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../kitt-mocks/kitt-mocks.html">
+    <link rel="import" href="../kitt-platform/kitt-platform.html">
+</head>
+<body>
+
+<!-- You can use the document as a place to set up your fixtures. -->
+
+        <kitt-mocks></kitt-mocks>
+        <kitt-platform></kitt-platform>
+
+
+
+
+<script>
+
+    describe('<kitt-platform>', function() {
+
+        var kittPlatform = document.querySelector('kitt-platform');
+
+        it('should return the info from the platform', function(done) {
+            kittPlatform.getInfo().then(function(info){
+                assert.equal(info.appVersion, 'appVersion');
+                assert.equal(info.deviceName, 'deviceName');
+                assert.equal(info.deviceVersion, 'deviceVersion');
+                assert.equal(info.deviceManufacturer, 'deviceManufacturer');
+                assert.equal(info.deviceModel, 'deviceModel');
+                done();
+            });
+        });
+
+        it('should return status of screen reader', function(done) {
+            kittPlatform.isScreenReader().then(function(isScreenReader){
+                assert.equal(isScreenReader, false);
+                done();
+            });
+        });
+
+        it('should return selected language', function(done) {
+            kittPlatform.getLanguage().then(function(langualge){
+                assert.equal(langualge, 'en');
+                done();
+            });
+        });
+
+        it('should return device is tablet', function(done) {
+            kittPlatform.isTablet().then(function(isTablet){
+                assert.equal(isTablet, false);
+                done();
+            });
+        });
+
+
+    });
+</script>
+
+</body>
+</html>

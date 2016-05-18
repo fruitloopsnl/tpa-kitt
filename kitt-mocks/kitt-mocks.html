@@ -1,0 +1,153 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="kitt-mocks">
+
+    <script>
+
+        // overwrite addEventListener
+        (function (addEventListener) {
+            window.document.addEventListener = function (name, callback, options) {
+                if (name === 'deviceready') {
+                    return callback();
+                } else {
+                    addEventListener(name, callback, options);
+                }
+            };
+        })(window.document.addEventListener);
+
+        Polymer({
+            is: 'kitt-mocks',
+
+            data: {
+                appVersion: 'appVersion'
+            },
+
+            properties: {
+                appVersion: {
+                    type: String,
+                    value: 'appVersion'
+                },
+                deviceName: {
+                    type: String,
+                    value: 'deviceName'
+                },
+                deviceVersion: {
+                    type: String,
+                    value: 'deviceVersion'
+                },
+                deviceManufacturer: {
+                    type: String,
+                    value: 'deviceManufacturer'
+                },
+                deviceModel: {
+                    type: String,
+                    value: 'deviceModel'
+                },
+                isScreenReader: {
+                    type: Boolean,
+                    value: false
+                },
+                language: {
+                    type: String,
+                    value: 'en'
+                },
+                isTablet: {
+                    type: Boolean,
+                    value: false
+                },
+
+            },
+
+            response: 'LKLKL',
+            onRequest: function(){},
+
+            ready: function () {
+
+                var self = this;
+
+                if(!window.device){
+                    window.device = {
+                        platform: self.deviceName,
+                        version: self.deviceVersion,
+                        manufacturer: self.deviceManufacturer,
+                        model: self.deviceModel
+                    };
+                }
+
+                if(!window.KittUrl) {
+                    window.KittUrl = {
+                        language: self.language,
+                        isTablet: self.isTablet
+                    };
+                }
+
+                window.KittNative = {
+
+                    userSession: {
+                        language: 'nl'
+                    },
+
+                    doGet: function (options, onSucces, onError) {
+                        self.onRequest(options);
+                        onSucces(self.response);
+                    },
+
+                    doPost: function (options, onSucces, onError) {
+                        self.onRequest(options);
+                        onSucces(self.response);
+                    },
+
+                    trackPage: function (pageName, successCallback) {
+                        successCallback();
+                    },
+
+                    trackEvent: function (pageName, eventName, successCallback) {
+                        successCallback();
+                    },
+
+                    setNavbarTitle: function (title, successCallback) {
+                        successCallback();
+                    },
+
+                    showNavbarBackButton: function () {
+                    },
+
+                    showNavbarMenuButton: function (successCallback) {
+                        successCallback();
+                    },
+
+                    getAppVersion: function (callback) {
+                        callback(self.appVersion);
+                    },
+
+                    alert: function (options) {
+                        window.alert(options.message);
+                    },
+
+                    call: function (phoneNumber) {
+                        window.alert('Call: ' + phoneNumber);
+                    },
+
+                    confirm: function (options, successCallback, errorCallback) {
+                        if ($window.confirm(options.message)) {
+                            successCallback();
+                        } else {
+                            errorCallback()
+                        }
+                    },
+
+                    close: function (successCallback) {
+                        successCallback();
+                    },
+
+                    isScreenReaderRunning: function(successCallback){
+                        successCallback(self.isScreenReader)
+                    }
+
+                }
+            }
+        });
+
+    </script>
+
+</dom-module>

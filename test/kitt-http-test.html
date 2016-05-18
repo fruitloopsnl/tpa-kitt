@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../iron-ajax/iron-ajax.html">
+
+    <link rel="import" href="../kitt-mocks/kitt-mocks.html">
+    <link rel="import" href="../kitt-http/kitt-http.html">
+
+</head>
+<body>
+
+<kitt-mocks></kitt-mocks>
+<kitt-http></kitt-http>
+<iron-ajax url="/api/test" handle-as="json"></iron-ajax>
+
+
+<script>
+
+    describe('<kitt-http>', function () {
+
+        var kittMocks = document.querySelector('kitt-mocks');
+        var ironAjax = document.querySelector('iron-ajax');
+
+        it('should do GET request', function (done) {
+
+            kittMocks.onRequest = function (options) {
+                assert.equal(options.url, '/api/test');
+
+            };
+            kittMocks.response = {test:'test'}
+
+            ironAjax.generateRequest();
+
+            ironAjax.addEventListener('response', function (e) {
+                assert.equal(ironAjax.lastResponse.test, 'test');
+                done();
+            });
+
+        });
+
+        it('should do POST request', function (done) {
+
+            kittMocks.onRequest = function (options) {
+                assert.equal(options.url, '/api/test');
+            };
+            kittMocks.response = {test:'test'}
+
+            ironAjax.method = 'post';
+            ironAjax.generateRequest();
+
+            ironAjax.addEventListener('response', function (e) {
+                assert.equal(ironAjax.lastResponse.test, 'test');
+                done();
+            });
+
+        });
+
+    });
+</script>
+
+</body>
+</html>

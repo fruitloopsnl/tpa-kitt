@@ -1,0 +1,100 @@
+<link rel="import" href="../../polymer/polymer.html">
+
+<dom-module id="kitt-platform">
+
+    <script>
+
+        Polymer({
+            is: 'kitt-platform',
+
+
+            ready: function () {
+                if (!window.KittUrl) {
+                    var params = {};
+                    var queryString = window.location.href.split('?')[1];
+                    if (queryString) {
+                        var queries = queryString.split('&');
+                        for (var i = 0; i < queries.length; i++) {
+                            var query = queries[i].split('=');
+                            params[query[0]] = query[1];
+                        }
+                    }
+                    window.KittUrl.language = params.language;
+                    window.KittUrl.isTablet = params.tablet;
+                }
+            },
+
+            /**
+             * Returns the app info.
+             * @returns {String} The app version.
+             */
+            getInfo: function () {
+                return new Promise(function (resolve, reject) {
+                    window.document.addEventListener('deviceready', function () {
+                        window.KittNative.getAppVersion(function (appVersion) {
+                                    var info = {
+                                        appVersion: appVersion,
+                                        deviceName: window.device.platform,
+                                        deviceVersion: window.device.version,
+                                        deviceManufacturer: window.device.manufacturer,
+                                        deviceModel: window.device.model
+                                    };
+                                    resolve(info);
+                                },
+                                function (err) {
+                                    reject(err);
+                                });
+                    });
+                });
+            },
+
+            /**
+             * Returns the screen reader activity
+             * @returns {Boolean} The activity state of the screen reader.
+             */
+            isScreenReader: function () {
+                return new Promise(function (resolve, reject) {
+                    window.document.addEventListener('deviceready', function () {
+                        window.KittNative.isScreenReaderRunning(function (state) {
+                                    resolve(state);
+                                },
+                                function (err) {
+                                    reject(err);
+                                });
+                    });
+                })
+            },
+
+            /**
+             * Returns the device language.
+             * @returns {String} The the device version.
+             */
+            getLanguage: function () {
+                return new Promise(function (resolve, reject) {
+                    if (window.KittUrl && window.KittUrl.language) {
+                        resolve(window.KittUrl.language);
+                    } else {
+                        reject('Cannot read "language" from queryString');
+                    }
+                })
+            },
+
+            /**
+             * Returns the device isTablet.
+             * @returns {String} The the device version.
+             */
+            isTablet: function () {
+                return new Promise(function (resolve, reject) {
+                    if (window.KittUrl && window.KittUrl.isTablet !== null) {
+                        resolve(window.KittUrl.isTablet);
+                    } else {
+                        //reject('Cannot read "isTablet" from queryString');
+                    }
+                });
+            }
+
+        });
+
+    </script>
+
+</dom-module>

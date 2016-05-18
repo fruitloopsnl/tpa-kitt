@@ -1,0 +1,26 @@
+{
+  "name": "tpa-kitt",
+  "homepage": "https://github.com/ING-Group/tpa-kitt",
+  "authors": [
+    "Willem Veelenturf <willem.veelenturf@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.4.0",
+    "webcomponentsjs": "~0.7.22"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#~4.2.2",
+    "iron-ajax": "polymerelements/iron-ajax#~1.2.0"
+  }
+}

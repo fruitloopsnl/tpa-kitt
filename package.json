@@ -1,0 +1,25 @@
+{
+  "name": "tpa-kitt",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "wct",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ING-Group/tpa-kitt.git"
+  },
+  "author": "Willem Veelenturf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ING-Group/tpa-kitt/issues"
+  },
+  "homepage": "https://github.com/ING-Group/tpa-kitt#readme"
+}

@@ -59,13 +59,16 @@
             },
 
             response: '',
-            onRequest: function(){},
+            onRequest: function () {
+            },
 
             ready: function () {
 
+                console.log(this.appVersion)
+
                 var self = this;
 
-                if(!window.device){
+                if (!window.device) {
                     window.device = {
                         platform: self.deviceName,
                         version: self.deviceVersion,
@@ -74,76 +77,77 @@
                     };
                 }
 
-                if(!window.KittUrl) {
+                if (!window.KittUrl) {
                     window.KittUrl = {
                         language: self.language,
                         isTablet: self.isTablet
                     };
                 }
 
-                window.KittNative = {
+                if (!window.KittNative) {
+                    window.KittNative = {
 
-                    userSession: {
-                        language: 'nl'
-                    },
+                        userSession: {
+                            language: 'nl'
+                        },
 
-                    doGet: function (options, onSucces, onError) {
-                        self.onRequest(options);
-                        onSucces(self.response);
-                    },
+                        doGet: function (options, onSucces, onError) {
+                            self.onRequest(options);
+                            onSucces(self.response);
+                        },
 
-                    doPost: function (options, onSucces, onError) {
-                        self.onRequest(options);
-                        onSucces(self.response);
-                    },
+                        doPost: function (options, onSucces, onError) {
+                            self.onRequest(options);
+                            onSucces(self.response);
+                        },
 
-                    trackPage: function (pageName, successCallback) {
-                        successCallback();
-                    },
-
-                    trackEvent: function (pageName, eventName, successCallback) {
-                        successCallback();
-                    },
-
-                    setNavbarTitle: function (title, successCallback) {
-                        successCallback();
-                    },
-
-                    showNavbarBackButton: function () {
-                    },
-
-                    showNavbarMenuButton: function (successCallback) {
-                        successCallback();
-                    },
-
-                    getAppVersion: function (callback) {
-                        callback(self.appVersion);
-                    },
-
-                    alert: function (options) {
-                        window.alert(options.message);
-                    },
-
-                    call: function (phoneNumber) {
-                        window.alert('Call: ' + phoneNumber);
-                    },
-
-                    confirm: function (options, successCallback, errorCallback) {
-                        if ($window.confirm(options.message)) {
+                        trackPage: function (pageName, successCallback) {
                             successCallback();
-                        } else {
-                            errorCallback()
+                        },
+
+                        trackEvent: function (pageName, eventName, successCallback) {
+                            successCallback();
+                        },
+
+                        setNavbarTitle: function (title, successCallback) {
+                            successCallback();
+                        },
+
+                        showNavbarBackButton: function () {
+                        },
+
+                        showNavbarMenuButton: function (successCallback) {
+                            successCallback();
+                        },
+
+                        getAppVersion: function (callback) {
+                            callback(self.appVersion);
+                        },
+
+                        alert: function (options) {
+                            window.alert(options.message);
+                        },
+
+                        call: function (phoneNumber) {
+                            window.alert('Call: ' + phoneNumber);
+                        },
+
+                        confirm: function (options, successCallback, errorCallback) {
+                            if ($window.confirm(options.message)) {
+                                successCallback();
+                            } else {
+                                errorCallback()
+                            }
+                        },
+
+                        close: function (successCallback) {
+                            successCallback();
+                        },
+
+                        isScreenReaderRunning: function (successCallback) {
+                            successCallback(self.isScreenReader)
                         }
-                    },
-
-                    close: function (successCallback) {
-                        successCallback();
-                    },
-
-                    isScreenReaderRunning: function(successCallback){
-                        successCallback(self.isScreenReader)
                     }
-
                 }
             }
         });

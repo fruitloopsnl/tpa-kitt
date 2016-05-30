@@ -1,10 +1,20 @@
 <link rel="import" href="../../polymer/polymer.html">
 
+<!--
+`<kitt-mocks>` mocks for testing kitt extention points in the browser.
+
+An element for testing kitt extention points in the browser.
+Example:
+    <kitt-mocks></tpa-mocks>
+-->
+
 <dom-module id="kitt-mocks">
 
     <script>
 
-        // overwrite addEventListener
+        /**
+         * Overwrite addEventListener for device ready event.
+         */
         (function (addEventListener) {
             window.document.addEventListener = function (name, callback, options) {
                 if (name === 'deviceready') {
@@ -23,34 +33,50 @@
             },
 
             properties: {
+
+                /** App Version. */
                 appVersion: {
                     type: String,
                     value: 'appVersion'
                 },
+
+                /** Device name */
                 deviceName: {
                     type: String,
                     value: 'deviceName'
                 },
+
+                /** Device Version. */
                 deviceVersion: {
                     type: String,
                     value: 'deviceVersion'
                 },
+
+                /** Device Manufacturer. */
                 deviceManufacturer: {
                     type: String,
                     value: 'deviceManufacturer'
                 },
+
+                /** Device Model. */
                 deviceModel: {
                     type: String,
                     value: 'deviceModel'
                 },
+
+                /** Screen Reader On */
                 isScreenReader: {
                     type: Boolean,
                     value: false
                 },
+
+                /** Language */
                 language: {
                     type: String,
                     value: 'en'
                 },
+
+                /** Device is tablet */
                 isTablet: {
                     type: Boolean,
                     value: false
@@ -58,7 +84,14 @@
 
             },
 
+            /**
+             * Response send
+             */
             response: '',
+
+            /**
+             * Called when ajax call is made.
+             */
             onRequest: function () {
             },
 

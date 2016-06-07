@@ -4,7 +4,7 @@
   "authors": [
     "Willem Veelenturf <willem.veelenturf@gmail.com>"
   ],
-  "description": "",
+  "description": "Web Component that provides reactive pattern capability using rxjs",
   "main": "index.html",
   "moduleType": [],
   "license": "MIT",

@@ -4,7 +4,7 @@
   "authors": [
     "Willem Veelenturf <willem.veelenturf@gmail.com>"
   ],
-  "description": "Web Component that provides reactive pattern capability using rxjs",
+  "description": "Web Component that provides interceptors for XHR for Hybrid Mobile integration",
   "main": "index.html",
   "moduleType": [],
   "license": "MIT",
